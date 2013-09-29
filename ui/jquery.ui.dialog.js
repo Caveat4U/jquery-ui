@@ -200,11 +200,11 @@ $.widget( "ui.dialog", {
 
 	_moveToTop: function( event, silent ) {
 		var moved = false,
-			zIndices = this.uiDialog.siblings( ".ui-front:visible" ).map(function() {
+			zIndexMax = Math.max.apply( null, this.uiDialog.siblings( ".ui-front:visible" ).map(function() {
 				return +$( this ).css( "z-index" );
-			}).sort().get().reverse();
-		if ( zIndices[ 0 ] >= +this.uiDialog.css( "z-index" ) ) {
-			this.uiDialog.css( "z-index", zIndices[ 0 ] + 1 );
+			}).get() );
+		if ( zIndexMax >= +this.uiDialog.css( "z-index" ) ) {
+			this.uiDialog.css( "z-index", zIndexMax + 1 );
 			moved = true;
 		}
 
